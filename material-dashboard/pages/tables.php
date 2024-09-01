@@ -12,6 +12,18 @@ if (isset($_POST['submit'])) {
   }
 }
 
+// nemu update 
+if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
+  $navEditID = $_GET['editID'];
+  $upMenuName = $_POST['editName'];
+  $upMenuDes = $_POST['editDes'];
+  // menu update sql 
+  $upNavSql = "UPDATE `menu_bar` SET `name`='$upMenuName',`description`='$upMenuDes' WHERE id=$navEditID";
+  if ($connectionDB->query($upNavSql)) {
+    $_SESSION["upSuc"] = true;
+  }
+}
+
 
 
 ?>
@@ -208,6 +220,34 @@ if (isset($_POST['submit'])) {
 
                     if ($navConnect->num_rows > 0) {
                       while ($row = $navConnect->fetch_assoc()) { ?>
+                        <!-- edit form in select data -->
+                        <?php
+                        if (isset($_GET['id'])) {
+                          $navEditID = $_GET['id'];
+                          if ($navEditID == $row['id']) { ?>
+                            <tr>
+                              <form action="tables.php?editID=<?php echo $navEditID ?>" method="post">
+                                <td>
+                                  <div class="input-group input-group-outline">
+                                    <label class="form-label"><?php echo $row['name']; ?></label>
+                                    <input type="text" name="editName" class="form-control" required>
+                                  </div>
+                                </td>
+                                <td>
+                                  <div class="input-group input-group-outline">
+                                    <label class="form-label"><?php echo $row['description']; ?> </label>
+                                    <input type="text" name="editDes" class="form-control" required>
+                                  </div>
+                                </td>
+                                <td>
+                                  <button type="submit" name="editSubmit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
+                                </td>
+                              </form>
+                            </tr>
+                        <?php }
+                        }
+                        ?>
+                        <!-- showing data in navbar  -->
                         <tr>
                           <td>
                             <div class="d-flex px-3 py-1">
@@ -218,17 +258,27 @@ if (isset($_POST['submit'])) {
                             <span><?php echo $row['description'] ?></span>
                           </td>
                           <td class="text-sm font-weight-normal">
-                            <a href="tables.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm mb-0 me-2">Edit</a>
+                            <?php 
+                              if (isset($_GET['id'])) { 
+                                $navEditID = $_GET['id'];
+                              if ($navEditID == $row['id']) { ?>
+                                <a>   </a>
+                             <?php } else {?>
+                              <a href="tables.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm mb-0 me-2">Edit</a>
+                            <?php }
+                             }  else {?>
+                              <a href="tables.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm mb-0 me-2">Edit</a>
+                            <?php 
+                            }
+                            ?>
                             <a href="../navItemDelete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                               Delete
                             </a>
                           </td>
                         </tr>
-
                     <?php  }
                     }
                     ?>
-
 
                   </tbody>
                 </table>
