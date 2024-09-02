@@ -2,30 +2,6 @@
 session_start();
 include("../database.php");
 
-// navbar added 
-if (isset($_POST['submit'])) {
-  $navNam = $_POST['menuName'];
-  $menuDes = $_POST['menuDes'];
-  $navAddSql = "INSERT INTO `menu_bar`(`name`, `description`) VALUES ('$navNam','$menuDes')";
-  if ($navAdd = $connectionDB->query($navAddSql)) {
-    $_SESSION['navAdded'] = true;
-  }
-}
-
-// nemu update 
-if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
-  $navEditID = $_GET['editID'];
-  $upMenuName = $_POST['editName'];
-  $upMenuDes = $_POST['editDes'];
-  // menu update sql 
-  $upNavSql = "UPDATE `menu_bar` SET `name`='$upMenuName',`description`='$upMenuDes' WHERE id=$navEditID";
-  if ($connectionDB->query($upNavSql)) {
-    $_SESSION["upSuc"] = true;
-  }
-}
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -57,98 +33,93 @@ if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <aside
+  
+<aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
     id="sidenav-main">
+
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
         aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="../index.php" target="_blank">
+      <a class="navbar-brand m-0" href="index.php"
+        target="_blank">
         <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Material Dashboard</span>
       </a>
     </div>
+
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/dashboard.html">
+          <a class="nav-link text-white" href="../index.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="../pages/tables.php">
+          <a class="nav-link text-white active" href="pages/tables.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Memu || Navbar</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/billing.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">receipt_long</i>
-            </div>
-            <span class="nav-link-text ms-1">Billing</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/virtual-reality.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">view_in_ar</i>
-            </div>
-            <span class="nav-link-text ms-1">Virtual Reality</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/rtl.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">format_textdirection_r_to_l</i>
-            </div>
-            <span class="nav-link-text ms-1">RTL</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/notifications.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">notifications</i>
-            </div>
-            <span class="nav-link-text ms-1">Notifications</span>
-          </a>
-        </li>
+
+        <!-- profile link  -->
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
+          <a class="nav-link text-white " href="./pages/profile.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
             <span class="nav-link-text ms-1">Profile</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-in.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign In</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-up.html">
-            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">assignment</i>
-            </div>
-            <span class="nav-link-text ms-1">Sign Up</span>
-          </a>
-        </li>
+
+        <!-- singin or singout button showing and hidding  -->
+        <?php if (isset($_SESSION["isAdmin"])) { ?>
+
+          <li class="nav-item">
+            <a class="nav-link text-white " href="signout.php">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">logout</i>
+              </div>
+              <span class="nav-link-text ms-1">Log Out</span>
+            </a>
+          </li>
+
+        <?php } elseif (!isset($_SESSION["isAdmin"])) { ?>
+
+          <li class="nav-item">
+            <a class="nav-link text-white " href="./pages/sign-in.php">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">login</i>
+              </div>
+              <span class="nav-link-text ms-1">Sign In</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white " href="./pages/sign-up.php">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="material-icons opacity-10">assignment</i>
+              </div>
+              <span class="nav-link-text ms-1">Sign Up</span>
+            </a>
+          </li>
+
+        <?php } ?>
       </ul>
     </div>
-  </aside>
+  </aside>  
+
+
+
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <div class="container-fluid py-4">
       <!-- protfolio name  -->
@@ -176,7 +147,7 @@ if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
                   </thead>
                   <tbody class="justify-content-between border-1">
                     <tr>
-                      <form action="tables.php" method="post">
+                      <form action="../menuAdd.php" method="post">
                         <td>
                           <div class="d-flex px-2 py-1 gap-2">
                             <div class="input-group input-group-outline">
@@ -226,7 +197,7 @@ if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
                           $navEditID = $_GET['id'];
                           if ($navEditID == $row['id']) { ?>
                             <tr>
-                              <form action="tables.php?editID=<?php echo $navEditID ?>" method="post">
+                              <form action="../menuAdd.php?php echo $navEditID ?>" method="post">
                                 <td>
                                   <div class="input-group input-group-outline">
                                     <label class="form-label"><?php echo $row['name']; ?></label>
@@ -288,7 +259,6 @@ if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
         </div>
       </div>
 
-
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -300,26 +270,8 @@ if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
                 </script>,
                 made with <i class="fa fa-heart"></i> by
                 <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+                for Use & Dev by BADSHA.
               </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About
-                    Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                    target="_blank">License</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
@@ -394,6 +346,7 @@ if (isset($_GET['editID']) & isset($_POST['editSubmit'])) {
       </div>
     </div>
   </div>
+
 
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
