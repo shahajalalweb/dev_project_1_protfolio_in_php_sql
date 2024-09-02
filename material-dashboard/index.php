@@ -48,7 +48,7 @@ if (!isset($_SESSION['isAdmin'])) {
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="index.php"
         target="_blank">
-        <img src="./assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Material Dashboard</span>
       </a>
     </div>
@@ -56,6 +56,8 @@ if (!isset($_SESSION['isAdmin'])) {
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
+
+        <!-- dashboard bar  -->
         <li class="nav-item">
           <a class="nav-link text-white active" href="index.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -65,8 +67,19 @@ if (!isset($_SESSION['isAdmin'])) {
           </a>
         </li>
 
+        <!-- protfolio name sidebar side -->
         <li class="nav-item">
-          <a class="nav-link text-white " href="pages/tables.php">
+          <a class="nav-link text-white " href="pages/protfolio-name.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">badge</i>
+            </div>
+            <span class="nav-link-text ms-1">Protfolio Name</span>
+          </a>
+        </li>
+
+        <!-- menu || navebar select  -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="pages/tables.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -91,7 +104,7 @@ if (!isset($_SESSION['isAdmin'])) {
         <?php if (isset($_SESSION["isAdmin"])) { ?>
 
           <li class="nav-item">
-            <a class="nav-link text-white " href="signout.php">
+            <a class="nav-link text-white " href="../signout.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">logout</i>
               </div>
@@ -121,7 +134,6 @@ if (!isset($_SESSION['isAdmin'])) {
         <?php } ?>
       </ul>
     </div>
-
   </aside>
 
   <!-- main part in body  -->
@@ -222,40 +234,14 @@ if (!isset($_SESSION['isAdmin'])) {
 
         </div>
       </div>
-
-
-
-      <div class="row">
-        <div class="col-12">
-          <div id="globe" class="position-absolute end-0 top-10 mt-sm-3 mt-7 me-lg-7">
-            <canvas width="700" height="600" class="w-lg-100 h-lg-100 w-75 h-75 me-lg-0 me-n10 mt-lg-5"></canvas>
-          </div>
-        </div>
-      </div>
-
-
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for Use & Dev by BADSHA.
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
+    <!-- footer include  -->
+    <?php include('footer.php') ?>
+
   </main>
 
- <!-- plugin in theme dev  -->
- <div class="fixed-plugin">
+  <!-- plugin in theme dev  -->
+  <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
       <i class="material-icons py-2">settings</i>
     </a>
@@ -322,9 +308,9 @@ if (!isset($_SESSION['isAdmin'])) {
     </div>
   </div>
 
-
   <!-- js script file  -->
   <?php include('script.php') ?>
+
 </body>
 
 </html>

@@ -33,8 +33,8 @@ include("../database.php");
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  
-<aside
+  <!-- aside / side bar  -->
+  <aside
     class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
     id="sidenav-main">
 
@@ -51,6 +51,8 @@ include("../database.php");
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
+
+        <!-- dashboard bar  -->
         <li class="nav-item">
           <a class="nav-link text-white" href="../index.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -60,8 +62,19 @@ include("../database.php");
           </a>
         </li>
 
+        <!-- protfolio name sidebar side -->
         <li class="nav-item">
-          <a class="nav-link text-white active" href="pages/tables.php">
+          <a class="nav-link text-white " href="protfolio-name.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">badge</i>
+            </div>
+            <span class="nav-link-text ms-1">Protfolio Name</span>
+          </a>
+        </li>
+
+        <!-- menu || navebar select  -->
+        <li class="nav-item">
+          <a class="nav-link text-white active" href="tables.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -86,7 +99,7 @@ include("../database.php");
         <?php if (isset($_SESSION["isAdmin"])) { ?>
 
           <li class="nav-item">
-            <a class="nav-link text-white " href="signout.php">
+            <a class="nav-link text-white " href="../signout.php">
               <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">logout</i>
               </div>
@@ -116,9 +129,7 @@ include("../database.php");
         <?php } ?>
       </ul>
     </div>
-  </aside>  
-
-
+  </aside>
 
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <div class="container-fluid py-4">
@@ -229,17 +240,17 @@ include("../database.php");
                             <span><?php echo $row['description'] ?></span>
                           </td>
                           <td class="text-sm font-weight-normal">
-                            <?php 
-                              if (isset($_GET['id'])) { 
-                                $navEditID = $_GET['id'];
+                            <?php
+                            if (isset($_GET['id'])) {
+                              $navEditID = $_GET['id'];
                               if ($navEditID == $row['id']) { ?>
-                                <a>   </a>
-                             <?php } else {?>
+                                <a> </a>
+                              <?php } else { ?>
+                                <a href="tables.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm mb-0 me-2">Edit</a>
+                              <?php }
+                            } else { ?>
                               <a href="tables.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm mb-0 me-2">Edit</a>
-                            <?php }
-                             }  else {?>
-                              <a href="tables.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-warning btn-sm mb-0 me-2">Edit</a>
-                            <?php 
+                            <?php
                             }
                             ?>
                             <a href="../navItemDelete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
@@ -258,25 +269,10 @@ include("../database.php");
           </div>
         </div>
       </div>
-
-      <footer class="footer py-4  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for Use & Dev by BADSHA.
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
+
+    <!-- footer include  -->
+    <?php include('../footer.php') ?>
   </main>
 
   <!-- plugin in theme dev  -->
