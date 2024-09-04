@@ -1,10 +1,14 @@
 <?php
 include("database.php");
-// protfolio name add sql  
+
+// select sql protfolio name 
 $protfolioSelectSql = "SELECT * FROM `protfolio_name` ORDER BY id DESC LIMIT 1";
 
-// protfolio navbar select sql 
+// select sql menubar
 $selectSqlNav = "SELECT * FROM `menu_bar`";
+
+//select sql bodyheader
+$headerBody = "SELECT * FROM `header_text` ORDER BY id DESC LIMIT 1";
 
 ?>
 
@@ -92,16 +96,16 @@ $selectSqlNav = "SELECT * FROM `menu_bar`";
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
 						<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-							<?php 
-								$navResult = $connectionDB->query($selectSqlNav);
-								if ($navResult->num_rows > 0) {
-									while ($navRow = $navResult->fetch_assoc()) {?>
-										<li class="smooth-menu"><a href="#<?php echo $navRow['name'];?>"><?php echo $navRow['name'];?></a></li>
-									<?php };
-								}
-							
-							?> 
-							
+							<?php
+							$navResult = $connectionDB->query($selectSqlNav);
+							if ($navResult->num_rows > 0) {
+								while ($navRow = $navResult->fetch_assoc()) { ?>
+									<li class="smooth-menu"><a href="#<?php echo $navRow['name']; ?>"><?php echo $navRow['name']; ?></a></li>
+							<?php };
+							}
+
+							?>
+
 							<!-- <li class=" smooth-menu"><a href="#education">education</a></li>
 							<li class="smooth-menu"><a href="#skills">skills</a></li>
 							<li class="smooth-menu"><a href="#experience">experience</a></li>
@@ -122,20 +126,27 @@ $selectSqlNav = "SELECT * FROM `menu_bar`";
 	<!-- top-area End -->
 
 	<!--welcome-hero start -->
-	<section id="welcome-hero" class="welcome-hero">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<div class="header-text">
-						<h2>hi <span>,</span> i am <br> browny <br> star <span>.</span> </h2>
-						<p>ui/ux designer and web developer</p>
-						<a href="assets/download/browney.txt" download>download resume</a>
-					</div><!--/.header-text-->
-				</div><!--/.col-->
-			</div><!-- /.row-->
-		</div><!-- /.container-->
+	<?php
+	$bodyHeaderSelect = $connectionDB->query($headerBody);
+	if ($bodyHeaderSelect->num_rows > 0) {
+		$bodyHeaderRow = $bodyHeaderSelect->fetch_assoc(); ?>
+		<section id="welcome-hero" class="welcome-hero bg-[url('/path/to/your/image.jpg')] bg-cover bg-center bg-no-repeat">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-center">
+						<div class="header-text">
+							<!-- <h2>hi <span>,</span> i am <br> browny <br> star <span>.</span> </h2> -->
+							<h2><?php echo $bodyHeaderRow['heading'] ?></h2>
+							<p>ui/ux designer and web developer</p>
+							<a href="assets/download/browney.txt" download>download resume</a>
+						</div><!--/.header-text-->
+					</div><!--/.col-->
+				</div><!-- /.row-->
+			</div><!-- /.container-->
 
-	</section><!--/.welcome-hero-->
+		</section><!--/.welcome-hero-->
+	<?php	}
+	?>
 	<!--welcome-hero end -->
 
 	<!--about start -->
