@@ -3,16 +3,14 @@ session_start();
 include("../database.php");
 
 if (isset($_GET['id'])) {
-    $delID = $_GET['id'];
-    // Assuming id is an integer, no need for quotes
-    $delSql = "DELETE FROM `header_text` WHERE `id` = $delID";
-    if ($connectionDB->query($delSql)) {
-        $_SESSION['bodyDelSuc'] = true;
+    $id = $_GET['id'];
+    $delQuery = "DELETE FROM `about` WHERE `id`='$id'";
+    if ($connectionDB->query($delQuery)) {
+        $_SESSION['delSuc'] = true;
     }
 }
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,6 +34,7 @@ if (isset($_GET['id'])) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script>     -->
     <!-- Nepcha Analytics (nepcha.com) -->
     <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -46,7 +45,7 @@ if (isset($_GET['id'])) {
     <aside
         class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark"
         id="sidenav-main">
-        <!-- sidebar header  -->
+
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
@@ -91,7 +90,7 @@ if (isset($_GET['id'])) {
 
                 <!-- Body Header Part add  -->
                 <li class="nav-item">
-                    <a class="nav-link text-white active" href="bodyHeader.php">
+                    <a class="nav-link text-white" href="bodyHeader.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">wysiwyg</i>
                         </div>
@@ -111,7 +110,7 @@ if (isset($_GET['id'])) {
 
                 <!-- About Me -->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="aboutMe.php">
+                    <a class="nav-link text-white active" href="aboutMe.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">info</i>
                         </div>
@@ -178,7 +177,7 @@ if (isset($_GET['id'])) {
                         <!-- Card Header -->
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Body Header</h6>
+                                <h6 class="text-white text-capitalize ps-3">About Me</h6>
                             </div>
                         </div>
 
@@ -188,105 +187,83 @@ if (isset($_GET['id'])) {
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Input Body header
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">input about your self
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Input body details
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">input about more details
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">CV
-                                            </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Background Image
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">input your image
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                ADD
+                                                ADD NAME
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="justify-content-between border-1">
                                         <tr>
-                                            <!-- input added filed  -->
                                             <?php
-                                            if (isset($_GET['editID'])) {
+                                            if (isset($_GET['editID'])) { 
                                                 $editID = $_GET['editID'];
-                                                $editSql = "SELECT * FROM `header_text` WHERE `id` = '$editID'";
+                                                $editSql = "SELECT * FROM `about` WHERE `id` = '$editID'";
                                                 // Correct the variable name here
                                                 if ($sqlData = $connectionDB->query($editSql)) {
                                                     if ($sqlData->num_rows > 0) {
                                                         $selectEdit = $sqlData->fetch_assoc(); ?>
-                                                        <form action="../bodyEdit.php" method="post" enctype="multipart/form-data">
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1 gap-1">
-                                                                    <div class="input-group input-group-outline">
-                                                                        <input type="text" name="bodyHeader" class="form-control" placeholder="<?php echo $selectEdit['heading']; ?>" required>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1 gap-1">
-                                                                    <div class="input-group input-group-outline">
-                                                                        <!-- <label class="form-label"></label> -->
-                                                                        <input type="text" name="bodyDetails" placeholder="<?php echo $selectEdit['details_head']; ?>" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1 gap-1">
-                                                                    <div class="input-group input-group-outline">
-                                                                        <label class="form-label"></label>
-                                                                        <input type="file" name="cvP" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1 gap-1">
-                                                                    <div class="input-group input-group-outline">
-                                                                        <label class="form-label"></label>
-                                                                        <input type="file" name="bodyBGI" class="form-control" required>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <button type="submit" name="bodyEdit" value="<?php echo $selectEdit['id']; ?>" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
-                                                            </td>
-                                                        </form>
-                                                <?php }
-                                                }
-                                            } else { ?>
-                                                <form action="../bodyAdd.php" method="post" enctype="multipart/form-data">
+                                                <form action="../aboutEdit.php" method="post" enctype="multipart/form-data">
                                                     <td>
-                                                        <div class="d-flex px-2 py-1 gap-1">
+                                                        <div class="d-flex px-2 py-1 gap-2">
                                                             <div class="input-group input-group-outline">
-                                                                <label class="form-label">Type here header</label>
-                                                                <input type="text" name="bodyHeader" class="form-control" required>
+                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="heading_about"></textarea>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex px-2 py-1 gap-1">
-                                                            <div class="input-group input-group-outline">
-                                                                <label class="form-label">Type here details</label>
-                                                                <input type="text" name="bodyDetails" class="form-control" required>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline h-36">
+                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="paragroup_about"></textarea>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex px-2 py-1 gap-1">
+                                                        <div class="d-flex px-2 py-1 gap-2">
                                                             <div class="input-group input-group-outline">
-                                                                <label class="form-label"></label>
-                                                                <input type="file" name="cvP" class="form-control" required>
+                                                                <!-- <label class="form-label">Type here name</label> -->
+                                                                <input type="file" name="image_about" class="form-control" required>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex px-2 py-1 gap-1">
+                                                        <button type="submit" value="<?php echo $selectEdit['id'] ?>" name="editID" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
+                                                    </td>
+                                                </form>
+
+                                              <?php   }   }  ?>
+                                            <?php } else { ?>
+                                                <!-- input added filed  -->
+                                                <form action="../aboutAdd.php" method="post" enctype="multipart/form-data">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
                                                             <div class="input-group input-group-outline">
-                                                                <label class="form-label"></label>
-                                                                <input type="file" name="bodyBGI" class="form-control" required>
+                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="Type here about info" name="heading_about"></textarea>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <button type="submit" name="bodyAdd" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Add</button>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline h-36">
+                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="Type here about details" name="paragroup_about"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <!-- <label class="form-label">Type here name</label> -->
+                                                                <input type="file" name="image_about" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" name="submit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Add</button>
                                                     </td>
                                                 </form>
                                             <?php } ?>
@@ -302,58 +279,50 @@ if (isset($_GET['id'])) {
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Header text</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Details</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">File CV</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Image</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">About info</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">About details</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">image</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- data showing in body header part  -->
+                                        <!-- Example Row -->
                                         <?php
-                                        $selectHeaderSql = "SELECT * FROM `header_text`";
-                                        $selectCon = $connectionDB->query("$selectHeaderSql");
-                                        if ($selectCon->num_rows > 0) {
-                                            while ($headRow = $selectCon->fetch_assoc()) { ?>
+                                        // nave/menu data select 
+                                        $nameSelectSql = "SELECT * FROM `about`";
+                                        $nameConnect = $connectionDB->query($nameSelectSql);
+
+                                        if ($nameConnect->num_rows > 0) {
+                                            while ($row = $nameConnect->fetch_assoc()) { ?>
                                                 <!-- showing data in navbar  -->
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $headRow['heading'] ?></span>
+                                                            <span><?php echo $row['heading_about'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $headRow['details_head'] ?></span>
+                                                            <span><?php echo $row['paragraph_about'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex px-3 py-1">
-                                                            <a class="btn btn-outline-danger btn-sm mb-0" href="../<?php echo $headRow['download_file'] ?>" target="_blanks">View CV</a>
+                                                        <div class="d-flex px-3 py-1 ">
+                                                            <img style="height: 100px; width: 150px;" src="../<?php echo $row['image_about'] ?>" alt="">
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <div style="width: 150px; height: 70px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                                                            <img src="../<?php echo $headRow['image']; ?>" alt="BG" style="width: 100%; height: 100%; object-fit: cover;">
-                                                        </div>
-
                                                     </td>
                                                     <td class="text-sm font-weight-normal">
-                                                        <a href="bodyHeader.php?editID=<?php echo $headRow['id'] ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="aboutMe.php?editID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Edit
                                                         </a>
-                                                        <a href="bodyHeader.php?id=<?php echo $headRow['id'] ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="aboutMe.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Delete
                                                         </a>
                                                     </td>
                                                 </tr>
                                         <?php  }
                                         }
-
                                         ?>
-
-
 
                                     </tbody>
                                 </table>
@@ -435,6 +404,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
+
 
     <!--   Core JS Files   -->
     <?php include('../script.php') ?>

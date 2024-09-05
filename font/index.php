@@ -130,15 +130,16 @@ $headerBody = "SELECT * FROM `header_text` ORDER BY id DESC LIMIT 1";
 	$bodyHeaderSelect = $connectionDB->query($headerBody);
 	if ($bodyHeaderSelect->num_rows > 0) {
 		$bodyHeaderRow = $bodyHeaderSelect->fetch_assoc(); ?>
-		<section id="welcome-hero" class="welcome-hero bg-[url('/path/to/your/image.jpg')] bg-cover bg-center bg-no-repeat">
+		<section id="welcome-hero" class="welcome-hero bg-cover bg-center bg-no-repeat" style="background-image: url('../<?php echo $bodyHeaderRow['image']; ?>');">
+
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="header-text">
 							<!-- <h2>hi <span>,</span> i am <br> browny <br> star <span>.</span> </h2> -->
 							<h2><?php echo $bodyHeaderRow['heading'] ?></h2>
-							<p>ui/ux designer and web developer</p>
-							<a href="assets/download/browney.txt" download>download resume</a>
+							<p><?php echo $bodyHeaderRow['details_head'] ?></p>
+							<a href="../<?php echo $bodyHeaderRow['download_file'] ?>" download>download resume</a>
 						</div><!--/.header-text-->
 					</div><!--/.col-->
 				</div><!-- /.row-->
