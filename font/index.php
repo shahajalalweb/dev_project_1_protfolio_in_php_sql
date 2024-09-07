@@ -16,6 +16,9 @@ $aboutSql = "SELECT * FROM `about` ORDER BY id DESC LIMIT 1";
 //select sql social media
 $socialSql = "SELECT * FROM `about`";
 
+//select sql contact info 
+$contactSql = "SELECT * FROM `contact_info` ORDER BY id DESC LIMIT 1";
+
 ?>
 
 
@@ -179,25 +182,36 @@ $socialSql = "SELECT * FROM `about`";
 								<p>
 									<?php echo $aboutRow['paragraph_about'] ?>
 								</p>
+
+								<!-- contact info added  -->
 								<div class="row">
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>phone</h3>
-											<p>987-123-6547</p>
+									<?php
+									$selectContact = $connectionDB->query($contactSql);
+									if ($selectContact->num_rows > 0) {
+										$selectContactRow = $selectContact->fetch_assoc(); ?>
+
+										<div class="col-sm-4">
+											<div class="single-about-add-info">
+												<h3>phone</h3>
+												<p><?php echo $selectContactRow['phone']; ?></p>
+											</div>
 										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>email</h3>
-											<p>browny@info.com</p>
+										<div class="col-sm-4">
+											<div class="single-about-add-info">
+												<h3>email</h3>
+												<p><?php echo $selectContactRow['email']; ?></p>
+											</div>
 										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="single-about-add-info">
-											<h3>website</h3>
-											<p>www.brownsine.com</p>
+										<div class="col-sm-4">
+											<div class="single-about-add-info">
+												<h3>website</h3>
+												<p><?php echo $selectContactRow['website']; ?></p>
+											</div>
 										</div>
-									</div>
+
+
+									<?php }
+									?>
 								</div>
 							</div>
 						</div>
@@ -222,8 +236,6 @@ $socialSql = "SELECT * FROM `about`";
 										<?php  }
 										}
 										?>
-
-
 									</ul><!-- / ul -->
 								</div><!-- /.about-list-icon -->
 							</div>
@@ -910,32 +922,53 @@ $socialSql = "SELECT * FROM `about`";
 					<div class="col-md-offset-1 col-md-5 col-sm-6">
 						<div class="single-contact-box">
 							<div class="contact-adress">
-								<div class="contact-add-head">
-									<h3>browny star</h3>
-									<p>uI/uX designer</p>
-								</div>
-								<div class="contact-add-info">
-									<div class="single-contact-add-info">
-										<h3>phone</h3>
-										<p>987-123-6547</p>
+
+								<!-- contact info added 2nd part contact us part  -->
+								<?php
+								$selectContact = $connectionDB->query($contactSql);
+								if ($selectContact->num_rows > 0) {
+									$selectContactRow = $selectContact->fetch_assoc(); ?>
+
+									<div class="contact-add-head">
+										<h3><?php echo $selectContactRow['name']; ?></h3>
+										<p><?php echo $selectContactRow['profetion']; ?></p>
 									</div>
-									<div class="single-contact-add-info">
-										<h3>email</h3>
-										<p>browny@info.com</p>
+									<div class="contact-add-info">
+										<div class="single-contact-add-info">
+											<h3>phone</h3>
+											<p><?php echo $selectContactRow['phone']; ?></p>
+										</div>
+										<div class="single-contact-add-info">
+											<h3>email</h3>
+											<p><?php echo $selectContactRow['email']; ?></p>
+										</div>
+										<div class="single-contact-add-info">
+											<h3>website</h3>
+											<p><?php echo $selectContactRow['website']; ?></p>
+										</div>
+
+									<?php }
+									?>
 									</div>
-									<div class="single-contact-add-info">
-										<h3>website</h3>
-										<p>www.brownsine.com</p>
-									</div>
-								</div>
 							</div><!--/.contact-adress-->
 							<div class="hm-foot-icon">
 								<ul>
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li><!--/li-->
-									<li><a href="#"><i class="fa fa-dribbble"></i></a></li><!--/li-->
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li><!--/li-->
-									<li><a href="#"><i class="fa fa-linkedin"></i></a></li><!--/li-->
-									<li><a href="#"><i class="fa fa-instagram"></i></a></li><!--/li-->
+									<!-- Example Row -->
+									<?php
+									// nave/menu data select 
+									$nameSelectSql = "SELECT * FROM `social`";
+									$nameConnect = $connectionDB->query($nameSelectSql);
+
+									if ($nameConnect->num_rows > 0) {
+										while ($row = $nameConnect->fetch_assoc()) { ?>
+											<li>
+												<a href="<?php echo $row['info_details'] ?>" target="_blank">
+													<?php echo $row['icon_name'] ?>
+												</a>
+											</li><!-- / li -->
+									<?php  }
+									}
+									?>
 								</ul><!--/ul-->
 							</div><!--/.hm-foot-icon-->
 						</div><!--/.single-contact-box-->

@@ -112,6 +112,16 @@ include("../database.php");
           </a>
         </li>
 
+        <!-- Contact Info-->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="contact-info.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">perm_contact_calendar</i>
+            </div>
+            <span class="nav-link-text ms-1">Contact Info</span>
+          </a>
+        </li>
+
         <!-- profile link  -->
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
