@@ -22,15 +22,16 @@ include("../database.php");
     <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
     <!-- Font Awesome Icons -->
-    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
     <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
     <!-- Nepcha Analytics (nepcha.com) -->
-    <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
     <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
+
 
 <body class="g-sidenav-show  bg-gray-200">
     <!-- aside / side bar  -->
@@ -160,6 +161,8 @@ include("../database.php");
         </div>
     </aside>
 
+
+
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="container-fluid py-4">
             <!-- protfolio name  -->
@@ -169,7 +172,7 @@ include("../database.php");
                         <!-- Card Header -->
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Portfolio Name</h6>
+                                <h6 class="text-white text-capitalize ps-3">Social Media</h6>
                             </div>
                         </div>
 
@@ -179,29 +182,95 @@ include("../database.php");
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Input your protfolio name
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Media Name
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Icon Name
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Input your Media Link
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                ADD NAME
+                                                ADD Media
                                             </th>
                                         </tr>
                                     </thead>
+
+                                    <!-- form add -->
                                     <tbody class="justify-content-between border-1">
                                         <tr>
+
                                             <!-- input added filed  -->
-                                            <form action="../protfolioAdd.php" method="post">
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here name</label>
-                                                            <input type="text" name="menuName" class="form-control" required>
+                                            <?php
+                                            if (isset($_GET['editID'])) {
+                                                $editID = $_GET['editID'];
+                                                $editSql = "SELECT * FROM `social` WHERE `id` = '$editID'";
+                                                // Correct the variable name here
+                                                if ($sqlData = $connectionDB->query($editSql)) {
+                                                    if ($sqlData->num_rows > 0) {
+                                                        $selectEdit = $sqlData->fetch_assoc(); ?>
+                                                        <!-- input added filed  -->
+                                                        <form action="../socialEdit.php" method="post">
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <!-- <label class="form-label">Type here media</label> -->
+                                                                        <input type="text" name="editSocialName" placeholder="<?php echo $selectEdit['name'] ?>" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <!-- <label class="form-label">Type here icon name</label> -->
+                                                                        <input type="text" name="editSocialIcon" placeholder="<?php echo $selectEdit['icon_name'] ?>" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <!-- <label class="form-label">Type here link</label> -->
+                                                                        <input type="text" name="editSocialLink" placeholder="<?php echo $selectEdit['info_details'] ?>" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button type="submit" name="editSocialID" value="<?php echo $selectEdit['id'] ?>" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
+                                                            </td>
+                                                        </form>
+                                                <?php }
+                                                }
+                                            } else { ?>
+                                                <!-- input added filed  -->
+                                                <form action="../socialAdd.php" method="post">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <label class="form-label">Type here media</label>
+                                                                <input type="text" name="addSocialName" class="form-control" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <button type="submit" name="submit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Add</button>
-                                                </td>
-                                            </form>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <label class="form-label">Type here icon name</label>
+                                                                <input type="text" name="addSocialIcon" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <label class="form-label">Type here link</label>
+                                                                <input type="text" name="addSocialLink" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" name="submit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Add</button>
+                                                    </td>
+                                                </form>
+                                            <?php } ?>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -214,15 +283,18 @@ include("../database.php");
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Protfolio Name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">icon</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">link</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
+                                    
                                     <tbody>
                                         <!-- Example Row -->
                                         <?php
                                         // nave/menu data select 
-                                        $nameSelectSql = "SELECT * FROM `protfolio_name`";
+                                        $nameSelectSql = "SELECT * FROM `social`";
                                         $nameConnect = $connectionDB->query($nameSelectSql);
 
                                         if ($nameConnect->num_rows > 0) {
@@ -231,11 +303,25 @@ include("../database.php");
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
+                                                            
                                                             <span><?php echo $row['name'] ?></span>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="d-flex px-3 py-1">
+                                                            <?php echo $row['icon_name'] ?>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-3 py-1">
+                                                            <span><?php echo $row['info_details'] ?></span>
+                                                        </div>
+                                                    </td>
                                                     <td class="text-sm font-weight-normal">
-                                                        <a href="../protfolioNameDelete.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="social.php?editID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                            Edit
+                                                        </a>
+                                                        <a href="../socialDel.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Delete
                                                         </a>
                                                     </td>
@@ -324,7 +410,6 @@ include("../database.php");
             </div>
         </div>
     </div>
-
 
     <!--   Core JS Files   -->
     <?php include('../script.php') ?>

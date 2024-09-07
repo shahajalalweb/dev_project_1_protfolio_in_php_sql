@@ -238,7 +238,7 @@ include("../database.php");
                           $navEditID = $_GET['id'];
                           if ($navEditID == $row['id']) { ?>
                             <tr>
-                              <form action="../menuAdd.php?php echo $navEditID ?>" method="post">
+                              <form action="../menuAdd.php?editID=<?php echo $navEditID ?>" method="post">
                                 <td>
                                   <div class="input-group input-group-outline">
                                     <label class="form-label"><?php echo $row['name']; ?></label>

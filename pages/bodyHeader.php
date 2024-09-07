@@ -320,41 +320,33 @@ if (isset($_GET['id'])) {
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $headRow['heading'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $headRow['heading'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $headRow['details_head'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $headRow['details_head'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <a class="btn btn-outline-danger btn-sm mb-0" href="../<?php echo $headRow['download_file'] ?>" target="_blanks">View CV</a>
+                                                            <a class="btn btn-outline-danger btn-sm mb-0" href="../<?php echo $headRow['download_file'] ?>" target="_blank">View CV</a>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div style="width: 150px; height: 70px; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                                                             <img src="../<?php echo $headRow['image']; ?>" alt="BG" style="width: 100%; height: 100%; object-fit: cover;">
                                                         </div>
-
                                                     </td>
                                                     <td class="text-sm font-weight-normal">
-                                                        <a href="bodyHeader.php?editID=<?php echo $headRow['id'] ?>" class="btn btn-outline-danger btn-sm mb-0">
-                                                            Edit
-                                                        </a>
-                                                        <a href="bodyHeader.php?id=<?php echo $headRow['id'] ?>" class="btn btn-outline-danger btn-sm mb-0">
-                                                            Delete
-                                                        </a>
+                                                        <a href="bodyHeader.php?editID=<?php echo $headRow['id'] ?>" class="btn btn-outline-danger btn-sm mb-0">Edit</a>
+                                                        <a href="bodyHeader.php?id=<?php echo $headRow['id'] ?>" class="btn btn-outline-danger btn-sm mb-0">Delete</a>
                                                     </td>
                                                 </tr>
+
                                         <?php  }
                                         }
-
                                         ?>
-
-
-
                                     </tbody>
                                 </table>
                             </div>

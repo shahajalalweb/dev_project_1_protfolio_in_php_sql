@@ -201,42 +201,43 @@ if (isset($_GET['id'])) {
                                     <tbody class="justify-content-between border-1">
                                         <tr>
                                             <?php
-                                            if (isset($_GET['editID'])) { 
+                                            if (isset($_GET['editID'])) {
                                                 $editID = $_GET['editID'];
                                                 $editSql = "SELECT * FROM `about` WHERE `id` = '$editID'";
                                                 // Correct the variable name here
                                                 if ($sqlData = $connectionDB->query($editSql)) {
                                                     if ($sqlData->num_rows > 0) {
                                                         $selectEdit = $sqlData->fetch_assoc(); ?>
-                                                <form action="../aboutEdit.php" method="post" enctype="multipart/form-data">
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1 gap-2">
-                                                            <div class="input-group input-group-outline">
-                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="heading_about"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1 gap-2">
-                                                            <div class="input-group input-group-outline h-36">
-                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="paragroup_about"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1 gap-2">
-                                                            <div class="input-group input-group-outline">
-                                                                <!-- <label class="form-label">Type here name</label> -->
-                                                                <input type="file" name="image_about" class="form-control" required>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="submit" value="<?php echo $selectEdit['id'] ?>" name="editID" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
-                                                    </td>
-                                                </form>
+                                                        <form action="../aboutEdit.php" method="post" enctype="multipart/form-data">
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="heading_about"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline h-36">
+                                                                        <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="paragroup_about"></textarea>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <!-- <label class="form-label">Type here name</label> -->
+                                                                        <input type="file" name="image_about" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button type="submit" value="<?php echo $selectEdit['id'] ?>" name="editID" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
+                                                            </td>
+                                                        </form>
 
-                                              <?php   }   }  ?>
+                                                <?php   }
+                                                }  ?>
                                             <?php } else { ?>
                                                 <!-- input added filed  -->
                                                 <form action="../aboutAdd.php" method="post" enctype="multipart/form-data">
@@ -298,16 +299,16 @@ if (isset($_GET['id'])) {
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['heading_about'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['heading_about'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['paragraph_about'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['paragraph_about'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="d-flex px-3 py-1 ">
+                                                        <div class="d-flex px-3 py-1">
                                                             <img style="height: 100px; width: 150px;" src="../<?php echo $row['image_about'] ?>" alt="">
                                                         </div>
                                                     </td>
@@ -320,6 +321,7 @@ if (isset($_GET['id'])) {
                                                         </a>
                                                     </td>
                                                 </tr>
+
                                         <?php  }
                                         }
                                         ?>
