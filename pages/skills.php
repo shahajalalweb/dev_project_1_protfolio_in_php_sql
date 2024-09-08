@@ -111,7 +111,7 @@ include("../database.php");
                 </li>
                 <!-- Contact Info-->
                 <li class="nav-item">
-                    <a class="nav-link text-white active" href="contact-info.php">
+                    <a class="nav-link text-white" href="contact-info.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">perm_contact_calendar</i>
                         </div>
@@ -119,15 +119,16 @@ include("../database.php");
                     </a>
                 </li>
 
-                <!-- skills -->
+                <!--Skills-->
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="skills.php">
+                    <a class="nav-link text-white active" href="skills.php">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">psychology</i>
                         </div>
                         <span class="nav-link-text ms-1">Skills</span>
                     </a>
                 </li>
+
 
                 <!-- profile link  -->
                 <li class="nav-item mt-3">
@@ -188,7 +189,7 @@ include("../database.php");
                         <!-- Card Header -->
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Contact Info</h6>
+                                <h6 class="text-white text-capitalize ps-3">Skills</h6>
                             </div>
                         </div>
 
@@ -198,62 +199,32 @@ include("../database.php");
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">name
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">skills name
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Profetion
-                                            </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone
-                                            </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email
-                                            </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Website
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">skills percentage
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Add contact
+                                                Add skills
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody class="justify-content-between border-1">
                                         <tr>
                                             <!-- input added filed  -->
-                                            <form action="../contact_crud.php" method="post">
+                                            <form action="../skill_crud.php" method="post">
                                                 <td>
                                                     <div class="d-flex px-2 py-1 gap-2">
                                                         <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here name</label>
-                                                            <input type="text" name="name" class="form-control" required>
+                                                            <label class="form-label">Type here skill</label>
+                                                            <input type="text" name="skillName" class="form-control" required>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex px-2 py-1 gap-2">
                                                         <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here profetion</label>
-                                                            <input type="text" name="profetion" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here phone</label>
-                                                            <input type="text" name="phone" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here email</label>
-                                                            <input type="text" name="email" class="form-control" required>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here website</label>
-                                                            <input type="text" name="website" class="form-control" required>
+                                                            <label class="form-label">Type here skill value percentage</label>
+                                                            <input type="text" name="skillValue" class="form-control" required>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -275,9 +246,6 @@ include("../database.php");
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">name</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">profetion</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Website</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
@@ -285,11 +253,11 @@ include("../database.php");
                                         <!-- Example Row -->
                                         <?php
                                         // nave/menu data select 
-                                        $contactInfoSql = "SELECT * FROM `contact_info`";
-                                        $connectContactInfo = $connectionDB->query($contactInfoSql);
+                                        $skillConSql = "SELECT * FROM `skills`";
+                                        $conSkill = $connectionDB->query($skillConSql);
 
-                                        if ($connectContactInfo->num_rows > 0) {
-                                            while ($row = $connectContactInfo->fetch_assoc()) { ?>
+                                        if ($conSkill->num_rows > 0) {
+                                            while ($row = $conSkill->fetch_assoc()) { ?>
                                                 <!-- showing data in navbar  -->
                                                 <tr>
                                                     <td>
@@ -299,26 +267,11 @@ include("../database.php");
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['profetion'] ?></span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['phone'] ?></span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['email'] ?></span>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['website'] ?></span>
+                                                            <span><?php echo $row['value'] ?>%</span>
                                                         </div>
                                                     </td>
                                                     <td class="text-sm font-weight-normal">
-                                                        <a href="../contact_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="../skill_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Delete
                                                         </a>
                                                     </td>
