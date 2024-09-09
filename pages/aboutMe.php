@@ -68,13 +68,13 @@ if (isset($_GET['id'])) {
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1 gap-2">
-                                                                    <div class="input-group input-group-outline h-36">
-                                                                        <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="paragroup_about"></textarea>
+                                                                <td>
+                                                                    <div class="d-flex px-2 py-1 gap-2">
+                                                                        <div class="input-group input-group-outline h-36">
+                                                                            <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="paragroup_about"></textarea>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
+                                                                </td>
                                                             <td>
                                                                 <div class="d-flex px-2 py-1 gap-2">
                                                                     <div class="input-group input-group-outline">

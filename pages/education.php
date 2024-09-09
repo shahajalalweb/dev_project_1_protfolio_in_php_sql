@@ -22,7 +22,7 @@ include("../database.php");
                         <!-- Card Header -->
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Skills</h6>
+                                <h6 class="text-white text-capitalize ps-3">Education</h6>
                             </div>
                         </div>
 
@@ -32,9 +32,15 @@ include("../database.php");
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">skills name
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">University
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">skills percentage
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subject
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">university location
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Education year
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Details
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                 Add skills
@@ -48,16 +54,39 @@ include("../database.php");
                                                 <td>
                                                     <div class="d-flex px-2 py-1 gap-2">
                                                         <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here skill</label>
-                                                            <input type="text" name="skillName" class="form-control" required>
+                                                            <!-- <label class="form-label">Type here skill</label> -->
+                                                            <input type="text" name="skillName" class="form-control" placeholder="University name" required>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex px-2 py-1 gap-2">
                                                         <div class="input-group input-group-outline">
-                                                            <label class="form-label">Type here skill value percentage</label>
-                                                            <input type="text" name="skillValue" class="form-control" required>
+                                                            <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                            <input type="text" name="skillValue" placeholder="Subject name" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1 gap-2">
+                                                        <div class="input-group input-group-outline">
+                                                            <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                            <input type="text" name="skillValue" placeholder="University location" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1 gap-2">
+                                                        <div class="input-group input-group-outline">
+                                                            <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                            <input type="text" name="skillValue" placeholder="Education year" class="form-control" required>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1 gap-2">
+                                                        <div class="input-group input-group-outline h-36">
+                                                            <textarea class="p-2" style="width: 250px; height: 100px;" placeholder="Details" name="paragroup_about"></textarea>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -77,8 +106,11 @@ include("../database.php");
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">name</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">profetion</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">University</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subject</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">University Location</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Education year</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Details</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
@@ -86,25 +118,43 @@ include("../database.php");
                                         <!-- Example Row -->
                                         <?php
                                         // nave/menu data select 
-                                        $skillConSql = "SELECT * FROM `skills`";
-                                        $conSkill = $connectionDB->query($skillConSql);
+                                        $eduCon_sql = "SELECT * FROM `education`";
+                                        $conEducation = $connectionDB->query($eduCon_sql);
 
-                                        if ($conSkill->num_rows > 0) {
-                                            while ($row = $conSkill->fetch_assoc()) { ?>
+                                        if ($conEducation->num_rows > 0) {
+                                            while ($row = $conEducation->fetch_assoc()) { ?>
                                                 <!-- showing data in navbar  -->
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['name'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['university'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span><?php echo $row['value'] ?>%</span>
+                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['subject'] ?></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-3 py-1">
+                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['location_university'] ?></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-3 py-1">
+                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['year'] ?></span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-3 py-1">
+                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['details'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td class="text-sm font-weight-normal">
-                                                        <a href="../skill_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="education.php?editID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                            Edit
+                                                        </a>
+                                                        <a href="../education_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Delete
                                                         </a>
                                                     </td>
