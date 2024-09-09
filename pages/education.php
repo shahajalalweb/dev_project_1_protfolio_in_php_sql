@@ -49,51 +49,108 @@ include("../database.php");
                                     </thead>
                                     <tbody class="justify-content-between border-1">
                                         <tr>
-                                            <!-- input added filed  -->
-                                            <form action="../skill_crud.php" method="post">
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <!-- <label class="form-label">Type here skill</label> -->
-                                                            <input type="text" name="skillName" class="form-control" placeholder="University name" required>
+                                            <?php
+                                            if (isset($_GET['editID'])) {
+                                                $editID = $_GET['editID'];
+                                                $educationSelect_sql = "SELECT * FROM `education` WHERE `id` = '$editID'";
+                                                $educationSelect = $connectionDB->query($educationSelect_sql);
+                                                if ($educationSelect->num_rows > 0) {
+                                                    $editRow = $educationSelect->fetch_assoc(); ?>
+                                                    <!-- input edit filed  -->
+                                                    <form action="../education_crud.php" method="post">
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1 gap-2">
+                                                                <div class="input-group input-group-outline">
+                                                                    <!-- <label class="form-label">Type here skill</label> -->
+                                                                    <input type="text" name="university_edit" class="form-control" placeholder="<?php echo $editRow['university'] ?>" required>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1 gap-2">
+                                                                <div class="input-group input-group-outline">
+                                                                    <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                                    <input type="text" name="subject_edit" placeholder="<?php echo $editRow['subject'] ?>" class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1 gap-2">
+                                                                <div class="input-group input-group-outline">
+                                                                    <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                                    <input type="text" name="location_edit" placeholder="<?php echo $editRow['location_university'] ?>" class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1 gap-2">
+                                                                <div class="input-group input-group-outline">
+                                                                    <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                                    <input type="text" name="educationyear_edit" placeholder="<?php echo $editRow['year'] ?>" class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div class="d-flex px-2 py-1 gap-2">
+                                                                <div class="input-group input-group-outline h-36">
+                                                                    <textarea class="p-2" style="width: 250px; height: 100px;" placeholder="<?php echo $editRow['details'] ?>" name="details_edit"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <button type="submit" name="submit_edit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue" value="<?php echo $editRow['id']; ?>">Edit</button>
+                                                        </td>
+                                                    </form>
+                                                <?php }
+                                            } else { ?>
+                                                <!-- input added filed  -->
+                                                <form action="../education_crud.php" method="post">
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <!-- <label class="form-label">Type here skill</label> -->
+                                                                <input type="text" name="university" class="form-control" placeholder="University name" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <!-- <label class="form-label">Type here skill value percentage</label> -->
-                                                            <input type="text" name="skillValue" placeholder="Subject name" class="form-control" required>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                                <input type="text" name="subject" placeholder="Subject name" class="form-control" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <!-- <label class="form-label">Type here skill value percentage</label> -->
-                                                            <input type="text" name="skillValue" placeholder="University location" class="form-control" required>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                                <input type="text" name="location" placeholder="University location" class="form-control" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline">
-                                                            <!-- <label class="form-label">Type here skill value percentage</label> -->
-                                                            <input type="text" name="skillValue" placeholder="Education year" class="form-control" required>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <!-- <label class="form-label">Type here skill value percentage</label> -->
+                                                                <input type="text" name="educationyear" placeholder="Education year" class="form-control" required>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                        <div class="input-group input-group-outline h-36">
-                                                            <textarea class="p-2" style="width: 250px; height: 100px;" placeholder="Details" name="paragroup_about"></textarea>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline h-36">
+                                                                <textarea class="p-2" style="width: 250px; height: 100px;" placeholder="Details" name="details"></textarea>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <button type="submit" name="submit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Add</button>
-                                                </td>
-                                            </form>
+                                                    </td>
+                                                    <td>
+                                                        <button type="submit" name="submit" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Add</button>
+                                                    </td>
+                                                </form>
+                                            <?php }
+                                            ?>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -127,27 +184,27 @@ include("../database.php");
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['university'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['university'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['subject'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['subject'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['location_university'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['location_university'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['year'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['year'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;" ><?php echo $row['details'] ?></span>
+                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['details'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td class="text-sm font-weight-normal">
