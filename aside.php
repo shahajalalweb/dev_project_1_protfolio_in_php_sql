@@ -113,6 +113,16 @@
           </a>
         </li>
 
+        <!-- experience part -->
+        <li class="nav-item">
+          <a class="nav-link text-white <?= ($currentPage == 'experience.php') ? 'active' : ''; ?>" href="experience.php">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">navigation</i>
+            </div>
+            <span class="nav-link-text ms-1">Experience</span>
+          </a>
+        </li>
+
       </ul>
     </div>
 

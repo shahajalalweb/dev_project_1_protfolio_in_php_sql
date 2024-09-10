@@ -35,6 +35,11 @@ if ($selectSkill->num_rows > 0) {
 $totalSkill = count($skillName);
 $halfSkill = ceil($totalSkill / 2);
 
+//education data select sql 
+$educationSelect_sql = "SELECT * FROM `education`";
+
+
+
 ?>
 
 
@@ -272,76 +277,36 @@ $halfSkill = ceil($totalSkill / 2);
 		<div class="container">
 			<div class="education-horizontal-timeline">
 				<div class="row">
-					<div class="col-sm-4">
-						<div class="single-horizontal-timeline">
-							<div class="experience-time">
-								<h2>2008 - 2010</h2>
-								<h3>master <span>of </span> computer science</h3>
-							</div><!--/.experience-time-->
-							<div class="timeline-horizontal-border">
-								<i class="fa fa-circle" aria-hidden="true"></i>
-								<span class="single-timeline-horizontal"></span>
-							</div>
-							<div class="timeline">
-								<div class="timeline-content">
-									<h4 class="title">
-										university of north carolina
-									</h4>
-									<h5>north carolina, USA</h5>
-									<p class="description">
-										Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-									</p>
-								</div><!--/.timeline-content-->
-							</div><!--/.timeline-->
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="single-horizontal-timeline">
-							<div class="experience-time">
-								<h2>2004 - 2008</h2>
-								<h3>bachelor <span>of </span> computer science</h3>
-							</div><!--/.experience-time-->
-							<div class="timeline-horizontal-border">
-								<i class="fa fa-circle" aria-hidden="true"></i>
-								<span class="single-timeline-horizontal"></span>
-							</div>
-							<div class="timeline">
-								<div class="timeline-content">
-									<h4 class="title">
-										university of north carolina
-									</h4>
-									<h5>north carolina, USA</h5>
-									<p class="description">
-										Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-									</p>
-								</div><!--/.timeline-content-->
-							</div><!--/.timeline-->
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="single-horizontal-timeline">
-							<div class="experience-time">
-								<h2>2004 - 2008</h2>
-								<h3>bachelor <span>of </span> creative design</h3>
-							</div><!--/.experience-time-->
-							<div class="timeline-horizontal-border">
-								<i class="fa fa-circle" aria-hidden="true"></i>
-								<span class="single-timeline-horizontal spacial-horizontal-line
-									"></span>
-							</div>
-							<div class="timeline">
-								<div class="timeline-content">
-									<h4 class="title">
-										university of bolton
-									</h4>
-									<h5>bolton, united kingdome</h5>
-									<p class="description">
-										Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-									</p>
-								</div><!--/.timeline-content-->
-							</div><!--/.timeline-->
-						</div>
-					</div>
+					<?php 
+						$educationCon = $connectionDB->query($educationSelect_sql);
+						if ($educationCon->num_rows > 0) {
+							while ($educationRow = $educationCon->fetch_assoc()) { ?>
+								<div class="col-sm-4">
+									<div class="single-horizontal-timeline">
+										<div class="experience-time">
+											<h2><?php echo $educationRow['year']; ?></h2>
+											<h3><?php echo $educationRow['subject']; ?></h3>
+										</div><!--/.experience-time-->
+										<div class="timeline-horizontal-border">
+											<i class="fa fa-circle" aria-hidden="true"></i>
+											<span class="single-timeline-horizontal"></span>
+										</div>
+										<div class="timeline">
+											<div class="timeline-content">
+												<h4 class="title">
+												<?php echo $educationRow['university']; ?>
+												</h4>
+												<h5><?php echo $educationRow['location_university']; ?></h5>
+												<p class="description">
+												<?php echo $educationRow['details']; ?>
+												</p>
+											</div><!--/.timeline-content-->
+										</div><!--/.timeline-->
+									</div>
+								</div>
+						<?php	}
+						}
+					?>
 				</div>
 			</div>
 		</div>
@@ -382,7 +347,6 @@ $halfSkill = ceil($totalSkill / 2);
 						<div class="single-skill-content">
 						<?php 
 								for ($i=$halfSkill; $i < $totalSkill; $i++) { ?>
-									
 									<div class="barWrapper">
 										<span class="progressText"><?php echo $skillName[$i] ?> </span>
 										<div class="single-progress-txt">
