@@ -2,7 +2,7 @@
 session_start();
 include("database.php");
 
-// scial update 
+// scial add 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // $editSocialID = $_POST['editSocialID'];
     $addSocialName = $_POST['addSocialName'];

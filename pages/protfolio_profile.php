@@ -1,16 +1,8 @@
 <?php
 session_start();
 include("../database.php");
-
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-    $delQuery = "DELETE FROM `about` WHERE `id`='$id'";
-    if ($connectionDB->query($delQuery)) {
-        $_SESSION['delSuc'] = true;
-    }
-}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +10,7 @@ if (isset($_GET['id'])) {
 
 <body class="g-sidenav-show  bg-gray-200">
     <!-- aside / side bar  -->
-    <?php include('../aside.php') ?>
+    <?php include("../aside.php") ?>
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <div class="container-fluid py-4">
@@ -29,7 +21,7 @@ if (isset($_GET['id'])) {
                         <!-- Card Header -->
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">About Me</h6>
+                                <h6 class="text-white text-capitalize ps-3">Protfolio Profile</h6>
                             </div>
                         </div>
 
@@ -39,79 +31,86 @@ if (isset($_GET['id'])) {
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">input about your self
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Profile Name
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">input about more details
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">icon
                                             </th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">input your image
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"> Link
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                ADD NAME
+                                                ADD profile
                                             </th>
                                         </tr>
                                     </thead>
+
+                                    <!-- form add -->
                                     <tbody class="justify-content-between border-1">
                                         <tr>
+                                            <!-- input added filed  -->
                                             <?php
                                             if (isset($_GET['editID'])) {
                                                 $editID = $_GET['editID'];
-                                                $editSql = "SELECT * FROM `about` WHERE `id` = '$editID'";
+                                                $editSql = "SELECT * FROM `profiles` WHERE `id` = '$editID'";
                                                 // Correct the variable name here
                                                 if ($sqlData = $connectionDB->query($editSql)) {
                                                     if ($sqlData->num_rows > 0) {
                                                         $selectEdit = $sqlData->fetch_assoc(); ?>
-                                                        <form action="../aboutEdit.php" method="post" enctype="multipart/form-data">
+                                                        <!-- input added filed  -->
+                                                        <form action="../socialEdit.php" method="post">
                                                             <td>
                                                                 <div class="d-flex px-2 py-1 gap-2">
                                                                     <div class="input-group input-group-outline">
-                                                                        <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="heading_about"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                                <td>
-                                                                    <div class="d-flex px-2 py-1 gap-2">
-                                                                        <div class="input-group input-group-outline h-36">
-                                                                            <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="<?php echo $selectEdit['heading_about'] ?>" name="paragroup_about"></textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            <td>
-                                                                <div class="d-flex px-2 py-1 gap-2">
-                                                                    <div class="input-group input-group-outline">
-                                                                        <!-- <label class="form-label">Type here name</label> -->
-                                                                        <input type="file" name="image_about" class="form-control" required>
+                                                                        <!-- <label class="form-label">Type here media</label> -->
+                                                                        <input type="text" name="editSocialName" placeholder="<?php echo $selectEdit['profile_name'] ?>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <button type="submit" value="<?php echo $selectEdit['id'] ?>" name="editID" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <!-- <label class="form-label">Type here icon name</label> -->
+                                                                        <input type="text" name="editSocialIcon" placeholder="<?php echo $selectEdit['profile_icon'] ?>" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="d-flex px-2 py-1 gap-2">
+                                                                    <div class="input-group input-group-outline">
+                                                                        <!-- <label class="form-label">Type here link</label> -->
+                                                                        <input type="text" name="editSocialLink" placeholder="<?php echo $selectEdit['profile_link'] ?>" class="form-control" required>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <button type="submit" name="editProfile" value="<?php echo $selectEdit['id'] ?>" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
                                                             </td>
                                                         </form>
-
-                                                <?php   }
-                                                }  ?>
-                                            <?php } else { ?>
+                                                <?php }
+                                                }
+                                            } else { ?>
                                                 <!-- input added filed  -->
-                                                <form action="../aboutAdd.php" method="post" enctype="multipart/form-data">
+                                                <form action="../profile_crud.php" method="post">
                                                     <td>
                                                         <div class="d-flex px-2 py-1 gap-2">
                                                             <div class="input-group input-group-outline">
-                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="Type here about info" name="heading_about"></textarea>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex px-2 py-1 gap-2">
-                                                            <div class="input-group input-group-outline h-36">
-                                                                <textarea class="p-2" style="width: 300px; height: 150px;" placeholder="Type here about details" name="paragroup_about"></textarea>
+                                                                <label class="form-label">Type here profile</label>
+                                                                <input type="text" name="profile_name" class="form-control" required>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-2 py-1 gap-2">
                                                             <div class="input-group input-group-outline">
-                                                                <!-- <label class="form-label">Type here name</label> -->
-                                                                <input type="file" name="image_about" class="form-control" required>
+                                                                <label class="form-label">Type here icon</label>
+                                                                <input type="text" name="profile_icon" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1 gap-2">
+                                                            <div class="input-group input-group-outline">
+                                                                <label class="form-label">Type here link</label>
+                                                                <input type="text" name="profile_link" class="form-control" required>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -132,17 +131,18 @@ if (isset($_GET['id'])) {
                                 <table class="table align-items-center justify-content-between mb-0">
                                     <thead>
                                         <tr>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">About info</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">About details</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">image</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">icon</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">link</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Actions</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         <!-- Example Row -->
                                         <?php
                                         // nave/menu data select 
-                                        $nameSelectSql = "SELECT * FROM `about`";
+                                        $nameSelectSql = "SELECT * FROM `profiles`";
                                         $nameConnect = $connectionDB->query($nameSelectSql);
 
                                         if ($nameConnect->num_rows > 0) {
@@ -151,29 +151,28 @@ if (isset($_GET['id'])) {
                                                 <tr>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['heading_about'] ?></span>
+                                                            <span><?php echo $row['profile_name'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <span style="white-space: normal; word-wrap: break-word;"><?php echo $row['paragraph_about'] ?></span>
+                                                            <?php echo $row['profile_icon'] ?>
                                                         </div>
                                                     </td>
                                                     <td>
                                                         <div class="d-flex px-3 py-1">
-                                                            <img style="height: 100px; width: 150px;" src="../<?php echo $row['image_about'] ?>" alt="">
+                                                            <span><?php echo $row['profile_link'] ?></span>
                                                         </div>
                                                     </td>
                                                     <td class="text-sm font-weight-normal">
-                                                        <a href="aboutMe.php?editID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="protfolio_profile.php?editID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Edit
                                                         </a>
-                                                        <a href="aboutMe.php?id=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="../protfolio_profile_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Delete
                                                         </a>
                                                     </td>
                                                 </tr>
-
                                         <?php  }
                                         }
                                         ?>
@@ -191,9 +190,7 @@ if (isset($_GET['id'])) {
         <?php include('../footer.php') ?>
     </main>
 
-    <!-- plugin in theme dev  -->
     <?php include('../plugin.php'); ?>
-
 
     <!--   Core JS Files   -->
     <?php include('../script.php') ?>
