@@ -56,12 +56,12 @@ include("../database.php");
                                                     if ($sqlData->num_rows > 0) {
                                                         $selectEdit = $sqlData->fetch_assoc(); ?>
                                                         <!-- input added filed  -->
-                                                        <form action="../socialEdit.php" method="post">
+                                                        <form action="../profile_crud.php" method="post">
                                                             <td>
                                                                 <div class="d-flex px-2 py-1 gap-2">
                                                                     <div class="input-group input-group-outline">
                                                                         <!-- <label class="form-label">Type here media</label> -->
-                                                                        <input type="text" name="editSocialName" placeholder="<?php echo $selectEdit['profile_name'] ?>" class="form-control" required>
+                                                                        <input type="text" name="profileName_edit" placeholder="<?php echo $selectEdit['profile_name'] ?>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -69,7 +69,7 @@ include("../database.php");
                                                                 <div class="d-flex px-2 py-1 gap-2">
                                                                     <div class="input-group input-group-outline">
                                                                         <!-- <label class="form-label">Type here icon name</label> -->
-                                                                        <input type="text" name="editSocialIcon" placeholder="<?php echo $selectEdit['profile_icon'] ?>" class="form-control" required>
+                                                                        <input type="text" name="profileIcon_edit" placeholder="<?php echo $selectEdit['profile_icon'] ?>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </td>
@@ -77,12 +77,12 @@ include("../database.php");
                                                                 <div class="d-flex px-2 py-1 gap-2">
                                                                     <div class="input-group input-group-outline">
                                                                         <!-- <label class="form-label">Type here link</label> -->
-                                                                        <input type="text" name="editSocialLink" placeholder="<?php echo $selectEdit['profile_link'] ?>" class="form-control" required>
+                                                                        <input type="text" name="profileLink_edit" placeholder="<?php echo $selectEdit['profile_link'] ?>" class="form-control" required>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                             <td>
-                                                                <button type="submit" name="editProfile" value="<?php echo $selectEdit['id'] ?>" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
+                                                                <button type="submit" name="profile_edit" value="<?php echo $selectEdit['id'] ?>" class="btn btn-outline-primary btn-sm mb-0 me-3 text-blue">Edit</button>
                                                             </td>
                                                         </form>
                                                 <?php }
@@ -168,7 +168,7 @@ include("../database.php");
                                                         <a href="protfolio_profile.php?editID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Edit
                                                         </a>
-                                                        <a href="../protfolio_profile_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
+                                                        <a href="../profile_crud.php?deleteID=<?php echo $row['id']; ?>" class="btn btn-outline-danger btn-sm mb-0">
                                                             Delete
                                                         </a>
                                                     </td>
