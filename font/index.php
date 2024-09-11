@@ -38,7 +38,8 @@ $halfSkill = ceil($totalSkill / 2);
 //education data select sql 
 $educationSelect_sql = "SELECT * FROM `education`";
 
-
+//experience data select sql 
+$experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 
 ?>
 
@@ -277,35 +278,35 @@ $educationSelect_sql = "SELECT * FROM `education`";
 		<div class="container">
 			<div class="education-horizontal-timeline">
 				<div class="row">
-					<?php 
-						$educationCon = $connectionDB->query($educationSelect_sql);
-						if ($educationCon->num_rows > 0) {
-							while ($educationRow = $educationCon->fetch_assoc()) { ?>
-								<div class="col-sm-4">
-									<div class="single-horizontal-timeline">
-										<div class="experience-time">
-											<h2><?php echo $educationRow['year']; ?></h2>
-											<h3><?php echo $educationRow['subject']; ?></h3>
-										</div><!--/.experience-time-->
-										<div class="timeline-horizontal-border">
-											<i class="fa fa-circle" aria-hidden="true"></i>
-											<span class="single-timeline-horizontal"></span>
-										</div>
-										<div class="timeline">
-											<div class="timeline-content">
-												<h4 class="title">
-												<?php echo $educationRow['university']; ?>
-												</h4>
-												<h5><?php echo $educationRow['location_university']; ?></h5>
-												<p class="description">
-												<?php echo $educationRow['details']; ?>
-												</p>
-											</div><!--/.timeline-content-->
-										</div><!--/.timeline-->
+					<?php
+					$educationCon = $connectionDB->query($educationSelect_sql);
+					if ($educationCon->num_rows > 0) {
+						while ($educationRow = $educationCon->fetch_assoc()) { ?>
+							<div class="col-sm-4">
+								<div class="single-horizontal-timeline">
+									<div class="experience-time">
+										<h2><?php echo $educationRow['year']; ?></h2>
+										<h3><?php echo $educationRow['subject']; ?></h3>
+									</div><!--/.experience-time-->
+									<div class="timeline-horizontal-border">
+										<i class="fa fa-circle" aria-hidden="true"></i>
+										<span class="single-timeline-horizontal"></span>
 									</div>
+									<div class="timeline">
+										<div class="timeline-content">
+											<h4 class="title">
+												<?php echo $educationRow['university']; ?>
+											</h4>
+											<h5><?php echo $educationRow['location_university']; ?></h5>
+											<p class="description">
+												<?php echo $educationRow['details']; ?>
+											</p>
+										</div><!--/.timeline-content-->
+									</div><!--/.timeline-->
 								</div>
-						<?php	}
-						}
+							</div>
+					<?php	}
+					}
 					?>
 				</div>
 			</div>
@@ -325,39 +326,39 @@ $educationSelect_sql = "SELECT * FROM `education`";
 
 					<div class="col-md-6">
 						<div class="single-skill-content">
-							<?php 
-								for ($i=0; $i < $halfSkill; $i++) { ?>
-									
-									<div class="barWrapper">
-										<span class="progressText"><?php echo $skillName[$i] ?> </span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-												<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $skillValue[$i] ?>" aria-valuemin="10" aria-valuemax="100">
-		
-												</div>
+							<?php
+							for ($i = 0; $i < $halfSkill; $i++) { ?>
+
+								<div class="barWrapper">
+									<span class="progressText"><?php echo $skillName[$i] ?> </span>
+									<div class="single-progress-txt">
+										<div class="progress ">
+											<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $skillValue[$i] ?>" aria-valuemin="10" aria-valuemax="100">
+
 											</div>
-											<h3><?php echo $skillValue[$i] ?>%</h3>
 										</div>
-									</div><!-- /.barWrapper -->
+										<h3><?php echo $skillValue[$i] ?>%</h3>
+									</div>
+								</div><!-- /.barWrapper -->
 							<?php	}
 							?>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="single-skill-content">
-						<?php 
-								for ($i=$halfSkill; $i < $totalSkill; $i++) { ?>
-									<div class="barWrapper">
-										<span class="progressText"><?php echo $skillName[$i] ?> </span>
-										<div class="single-progress-txt">
-											<div class="progress ">
-												<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $skillValue[$i] ?>" aria-valuemin="10" aria-valuemax="100">
-		
-												</div>
+							<?php
+							for ($i = $halfSkill; $i < $totalSkill; $i++) { ?>
+								<div class="barWrapper">
+									<span class="progressText"><?php echo $skillName[$i] ?> </span>
+									<div class="single-progress-txt">
+										<div class="progress ">
+											<div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $skillValue[$i] ?>" aria-valuemin="10" aria-valuemax="100">
+
 											</div>
-											<h3><?php echo $skillValue[$i] ?>%</h3>
 										</div>
-									</div><!-- /.barWrapper -->
+										<h3><?php echo $skillValue[$i] ?>%</h3>
+									</div>
+								</div><!-- /.barWrapper -->
 							<?php	}
 							?>
 						</div>
@@ -378,163 +379,88 @@ $educationSelect_sql = "SELECT * FROM `education`";
 			<div class="experience-content">
 				<div class="main-timeline">
 					<ul>
-						<li>
-							<div class="single-timeline-box fix">
-								<div class="row">
-									<div class="col-md-5">
-										<div class="experience-time text-right">
-											<h2>2018 - Present</h2>
-											<h3>creative director</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-									<div class="col-md-offset-1 col-md-5">
-										<div class="timeline">
-											<div class="timeline-content">
-												<h4 class="title">
-													<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-													hoplony tech limited
-												</h4>
-												<h5>newyork, USA</h5>
-												<p class="description">
-													Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-												</p>
-											</div><!--/.timeline-content-->
-										</div><!--/.timeline-->
-									</div><!--/.col-->
-								</div>
-							</div><!--/.single-timeline-box-->
-						</li>
+						<?php
+						$counter = 0; // Initialize a counter to track odd/even rows
 
-						<li>
-							<div class="single-timeline-box fix">
-								<div class="row">
-									<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-										<div class="experience-time">
-											<h2>
-												<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-												2016 - 2018
-											</h2>
-											<h3>associate design director</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-									<div class="col-md-5">
-										<div class="timeline">
-											<div class="timeline-content text-right">
-												<h4 class="title">
-													hoplony tech limited
-												</h4>
-												<h5>newyork, USA</h5>
-												<p class="description">
-													Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-												</p>
-											</div><!--/.timeline-content-->
-										</div><!--/.timeline-->
-									</div><!--/.col-->
-									<div class="col-md-offset-1 col-md-5 experience-time-main">
-										<div class="experience-time">
-											<h2>
-												<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-												2016 - 2018
-											</h2>
-											<h3>associate design director</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-								</div>
-							</div><!--/.single-timeline-box-->
-						</li>
+						$experienceCon = $connectionDB->query($experienceSelect_sql);
+						if ($experienceCon->num_rows > 0) {
+							while ($experienceRow = $experienceCon->fetch_assoc()) {
+								// Determine alignment for experience-time and timeline-content based on the counter
+								if ($counter % 2 == 0) { ?>
+									<!-- right text using first  -->
+									<li>
+										<div class="single-timeline-box fix">
+											<div class="row">
+												<div class="col-md-5">
+													<div class="experience-time text-right">
+														<h2><?php echo $experienceRow['work_time'] ?></h2>
+														<h3><?php echo $experienceRow['work_name'] ?></h3>
+													</div><!--/.experience-time-->
+												</div><!--/.col-->
+												<div class="col-md-offset-1 col-md-5">
+													<div class="timeline">
+														<div class="timeline-content">
+															<h4 class="title">
+																<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+																<?php echo $experienceRow['company_name'] ?>
+															</h4>
+															<h5><?php echo $experienceRow['company_locatoin'] ?></h5>
+															<p class="description">
+															<?php echo $experienceRow['work_details'] ?>
+															</p>
+														</div><!--/.timeline-content-->
+													</div><!--/.timeline-->
+												</div><!--/.col-->
+											</div>
+										</div><!--/.single-timeline-box-->
+									</li>
 
-						<li>
-							<div class="single-timeline-box fix">
-								<div class="row">
-									<div class="col-md-5">
-										<div class="experience-time text-right">
-											<h2>2013 - 2016</h2>
-											<h3>senior UI/UX designer</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-									<div class="col-md-offset-1 col-md-5">
-										<div class="timeline">
-											<div class="timeline-content">
-												<h4 class="title">
-													<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-													hoplony tech limited
-												</h4>
-												<h5>newyork, USA</h5>
-												<p class="description">
-													Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-												</p>
-											</div><!--/.timeline-content-->
-										</div><!--/.timeline-->
-									</div><!--/.col-->
-								</div>
-							</div><!--/.single-timeline-box-->
-						</li>
+								<?php	} elseif ($counter % 2 != 0) { ?>
+									<!-- right text using second 	 -->
+									<li>
+										<div class="single-timeline-box fix">
+											<div class="row">
+												<div class="col-md-offset-1 col-md-5 experience-time-responsive">
+													<div class="experience-time">
+														<h2>
+															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+															<?php echo $experienceRow['work_time'] ?>
+														</h2>
+														<h3><?php echo $experienceRow['work_name'] ?></h3>
+													</div><!--/.experience-time-->
+												</div><!--/.col-->
+												<div class="col-md-5">
+													<div class="timeline">
+														<div class="timeline-content text-right">
+															<h4 class="title">
+															<?php echo $experienceRow['company_name'] ?>
+															</h4>
+															<h5><?php echo $experienceRow['company_locatoin'] ?></h5>
+															<p class="description">
+															<?php echo $experienceRow['work_details'] ?>
+															</p>
+														</div><!--/.timeline-content-->
+													</div><!--/.timeline-->
+												</div><!--/.col-->
+												<div class="col-md-offset-1 col-md-5 experience-time-main">
+													<div class="experience-time">
+														<h2>
+															<span><i class="fa fa-circle" aria-hidden="true"></i></span>
+															2016 - 2018
+														</h2>
+														<h3>associate design director</h3>
+													</div><!--/.experience-time-->
+												</div><!--/.col-->
+											</div>
+										</div><!--/.single-timeline-box-->
+									</li>
 
-						<li>
-							<div class="single-timeline-box fix">
-								<div class="row">
-									<div class="col-md-offset-1 col-md-5 experience-time-responsive">
-										<div class="experience-time">
-											<h2>
-												<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-												2012 - 2013
-											</h2>
-											<h3>UI/UX designer</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-									<div class="col-md-5">
-										<div class="timeline">
-											<div class="timeline-content text-right">
-												<h4 class="title">
-													hoplony tech limited
-												</h4>
-												<h5>newyork, USA</h5>
-												<p class="description">
-													Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-												</p>
-											</div><!--/.timeline-content-->
-										</div><!--/.timeline-->
-									</div><!--/.col-->
-									<div class="col-md-offset-1 col-md-5 experience-time-main">
-										<div class="experience-time">
-											<h2>
-												<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-												2012 - 2013
-											</h2>
-											<h3>UI/UX designer</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-								</div>
-							</div><!--/.single-timeline-box-->
-						</li>
-
-						<li>
-							<div class="single-timeline-box fix">
-								<div class="row">
-									<div class="col-md-5">
-										<div class="experience-time text-right">
-											<h2>2010 - 2012</h2>
-											<h3>frontend developer</h3>
-										</div><!--/.experience-time-->
-									</div><!--/.col-->
-									<div class="col-md-offset-1 col-md-5">
-										<div class="timeline">
-											<div class="timeline-content">
-												<h4 class="title">
-													<span><i class="fa fa-circle" aria-hidden="true"></i></span>
-													hoplony tech limited
-												</h4>
-												<h5>newyork, USA</h5>
-												<p class="description">
-													Duis aute irure dolor in reprehenderit in vol patate velit esse cillum dolore eu fugiat nulla pari. Excepteur sint occana inna tecat cupidatat non proident.
-												</p>
-											</div><!--/.timeline-content-->
-										</div><!--/.timeline-->
-									</div><!--/.col-->
-								</div>
-							</div><!--/.single-timeline-box-->
-						</li>
-
+						<?php
+								}
+								$counter++; // Increment the counter for the next row
+							}
+						}
+						?>
 					</ul>
 				</div><!--.main-timeline-->
 			</div><!--.experience-content-->
