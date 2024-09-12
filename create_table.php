@@ -69,9 +69,15 @@ $sql9 = "CREATE TABLE IF NOT EXISTS education (
     details VARCHAR(255)
 )";
 
+$sql10 = "CREATE TABLE IF NOT EXISTS profiles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    profile_name VARCHAR(255),
+    profile_icon VARCHAR(255),
+    profile_link VARCHAR(255)
+)";
 
 // Array of SQL queries
-$sql_queries = [$sql1, $sql2, $sql3, $sql4, $sql5, $sql6, $sql7, $sql8, $sql9];
+$sql_queries = [$sql1, $sql2, $sql3, $sql4, $sql5, $sql6, $sql7, $sql8, $sql9, $sql10];
 
 // Loop through each SQL query and execute
 foreach ($sql_queries as $sql) {

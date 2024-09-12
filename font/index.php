@@ -107,9 +107,7 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 		<div class="header-area">
 			<!-- Start Navigation -->
 			<nav class="navbar navbar-default bootsnav navbar-fixed dark no-background">
-
 				<div class="container">
-
 					<!-- Start Header Navigation -->
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
@@ -716,8 +714,8 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 			</div><!--/.container-->
 		</div><!--/.clients-area-->
 
-	</section><!--/.clients-->
 
+		
 	</section><!--/.clients-->
 	<!--clients end -->
 
@@ -875,7 +873,7 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 	<!-- appear js -->
 	<script src="assets/js/jquery.appear.js"></script>
 
-	<!-- for progress bar end -->
+
 
 	<!--owl.carousel.js-->
 	<script src="assets/js/owl.carousel.min.js"></script>
