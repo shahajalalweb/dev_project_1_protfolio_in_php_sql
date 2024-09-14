@@ -2,6 +2,10 @@
 session_start();
 include("../database.php");
 
+if(!$_SESSION['isAdmin']) {
+    header('Location: sign-in.php');
+}
+
 if (isset($_GET['id'])) {
     $delID = $_GET['id'];
     // Assuming id is an integer, no need for quotes

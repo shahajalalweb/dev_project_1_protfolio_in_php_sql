@@ -2,6 +2,9 @@
 <?php
 session_start();
 include("../database.php");
+if(!$_SESSION['isAdmin']) {
+    header('Location: sign-in.php');
+}
 
 ?>
 

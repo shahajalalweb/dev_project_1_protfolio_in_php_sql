@@ -2,6 +2,10 @@
 session_start();
 include("../database.php");
 
+if(!$_SESSION['isAdmin']) {
+    header('Location: sign-in.php');
+}
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $delQuery = "DELETE FROM `about` WHERE `id`='$id'";

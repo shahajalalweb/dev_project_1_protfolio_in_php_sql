@@ -210,28 +210,35 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 									if ($selectContact->num_rows > 0) {
 										$selectContactRow = $selectContact->fetch_assoc(); ?>
 
+										<style>
+											.single-about-add-info p {
+												word-wrap: break-word;
+												white-space: normal;
+												overflow-wrap: break-word;
+											}
+										</style>
+
 										<div class="col-sm-4">
 											<div class="single-about-add-info">
-												<h3>phone</h3>
+												<h3>Phone</h3>
 												<p><?php echo $selectContactRow['phone']; ?></p>
 											</div>
 										</div>
 										<div class="col-sm-4">
 											<div class="single-about-add-info">
-												<h3>email</h3>
+												<h3>Email</h3>
 												<p><?php echo $selectContactRow['email']; ?></p>
 											</div>
 										</div>
 										<div class="col-sm-4">
 											<div class="single-about-add-info">
-												<h3>website</h3>
+												<h3>Website</h3>
 												<p><?php echo $selectContactRow['website']; ?></p>
 											</div>
 										</div>
 
+									<?php } ?>
 
-									<?php }
-									?>
 								</div>
 							</div>
 						</div>
@@ -404,7 +411,7 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 															</h4>
 															<h5><?php echo $experienceRow['company_locatoin'] ?></h5>
 															<p class="description">
-															<?php echo $experienceRow['work_details'] ?>
+																<?php echo $experienceRow['work_details'] ?>
 															</p>
 														</div><!--/.timeline-content-->
 													</div><!--/.timeline-->
@@ -431,11 +438,11 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 													<div class="timeline">
 														<div class="timeline-content text-right">
 															<h4 class="title">
-															<?php echo $experienceRow['company_name'] ?>
+																<?php echo $experienceRow['company_name'] ?>
 															</h4>
 															<h5><?php echo $experienceRow['company_locatoin'] ?></h5>
 															<p class="description">
-															<?php echo $experienceRow['work_details'] ?>
+																<?php echo $experienceRow['work_details'] ?>
 															</p>
 														</div><!--/.timeline-content-->
 													</div><!--/.timeline-->
@@ -467,257 +474,7 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 	</section><!--/.experience-->
 	<!--experience end -->
 
-	<!--profiles start -->
-	<section id="profile" class="profiles">
-		<div class="profiles-details">
-			<div class="section-heading text-center">
-				<h2>profiles</h2>
-			</div>
-			<div class="container">
-				<div class="profiles-content">
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="single-profile">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-themeforest"></i></a>
-									<div class="profile-icon-name">themeforest</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-themeforest"></i></a>
-										<div class="profile-icon-name">themeforest</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-profile">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-dribbble"></i></a>
-									<div class="profile-icon-name">dribbble</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-dribbble"></i></a>
-										<div class="profile-icon-name">dribbble</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-profile">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-behance-logo"></i></a>
-									<div class="profile-icon-name">behance</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-behance-logo"></i></a>
-										<div class="profile-icon-name">behance</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-profile profile-no-border">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-github-logo"></i></a>
-									<div class="profile-icon-name">github</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-github-logo"></i></a>
-										<div class="profile-icon-name">github</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="profile-border"></div>
-					<div class="row">
-						<div class="col-sm-3">
-							<div class="single-profile">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-flickr-website-logo-silhouette"></i></a>
-									<div class="profile-icon-name">flickR</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-flickr-website-logo-silhouette"></i></a>
-										<div class="profile-icon-name">flickR</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-profile">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-smug"></i></a>
-									<div class="profile-icon-name">smungMung</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-smug"></i></a>
-										<div class="profile-icon-name">smungMung</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-profile">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-squarespace-logo"></i></a>
-									<div class="profile-icon-name">squareSpace</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-squarespace-logo"></i></a>
-										<div class="profile-icon-name">squareSpace</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<div class="single-profile profile-no-border">
-								<div class="profile-txt">
-									<a href=""><i class="flaticon-bitbucket-logotype-camera-lens-in-perspective"></i></a>
-									<div class="profile-icon-name">bitBucket</div>
-								</div>
-								<div class="single-profile-overlay">
-									<div class="profile-txt">
-										<a href=""><i class="flaticon-bitbucket-logotype-camera-lens-in-perspective"></i></a>
-										<div class="profile-icon-name">bitBucket</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
-	</section><!--/.profiles-->
-	<!--profiles end -->
-
-	<!--portfolio start -->
-	<section id="portfolio" class="portfolio">
-		<div class="portfolio-details">
-			<div class="section-heading text-center">
-				<h2>portfolio</h2>
-			</div>
-			<div class="container">
-				<div class="portfolio-content">
-					<div class="isotope">
-						<div class="row">
-
-							<div class="col-sm-4">
-								<div class="item">
-									<img src="assets/images/portfolio/p1.jpg" alt="portfolio image" />
-									<div class="isotope-overlay">
-										<a href="#">
-											ui/ux design
-										</a>
-									</div><!-- /.isotope-overlay -->
-								</div><!-- /.item -->
-								<div class="item">
-									<img src="assets/images/portfolio/p2.jpg" alt="portfolio image" />
-									<div class="isotope-overlay">
-										<a href="#">
-											ui/ux design
-										</a>
-									</div><!-- /.isotope-overlay -->
-								</div><!-- /.item -->
-							</div><!-- /.col -->
-
-							<div class="col-sm-4">
-								<div class="item">
-									<img src="assets/images/portfolio/p3.jpg" alt="portfolio image" />
-									<div class="isotope-overlay">
-										<a href="#">
-											web design
-										</a>
-									</div><!-- /.isotope-overlay -->
-								</div><!-- /.item -->
-							</div><!-- /.col -->
-
-							<div class="col-sm-4">
-								<div class="item">
-									<img src="assets/images/portfolio/p4.jpg" alt="portfolio image" />
-									<div class="isotope-overlay">
-										<a href="#">
-											web development
-										</a>
-									</div><!-- /.isotope-overlay -->
-								</div><!-- /.item -->
-								<div class="item">
-									<img src="assets/images/portfolio/p5.jpg" alt="portfolio image" />
-									<div class="isotope-overlay">
-										<a href="#">
-											web development
-										</a>
-									</div><!-- /.isotope-overlay -->
-								</div><!-- /.item -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!--/.isotope-->
-				</div><!--/.gallery-content-->
-			</div><!--/.container-->
-		</div><!--/.portfolio-details-->
-
-	</section><!--/.portfolio-->
-	<!--portfolio end -->
-
-	<!--clients start -->
-	<section id="clients" class="clients">
-		<div class="section-heading text-center">
-			<h2>clients</h2>
-		</div>
-		<div class="clients-area">
-			<div class="container">
-				<div class="owl-carousel owl-theme" id="client">
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c1.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c2.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c3.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c4.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c5.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c6.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-					<div class="item">
-						<a href="#">
-							<img src="assets/images/clients/c7.png" alt="brand-image" />
-						</a>
-					</div><!--/.item-->
-				</div><!--/.owl-carousel-->
-			</div><!--/.container-->
-		</div><!--/.clients-area-->
-
-
-		
-	</section><!--/.clients-->
-	<!--clients end -->
 
 	<!--contact start -->
 	<section id="contact" class="contact">

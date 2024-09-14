@@ -4,6 +4,10 @@ if (!isset($_SESSION['isAdmin'])) {
   header('Location: pages/sign-in.php');
 }
 
+if(!$_SESSION['isAdmin']) {
+    header('Location: sign-in.php');
+}
+
 ?>
 
 <!DOCTYPE html>
