@@ -591,7 +591,7 @@ $experienceSelect_sql = "SELECT * FROM `experience` ORDER BY `id` DESC";
 		<div class="container">
 			<div class="hm-footer-copyright text-center">
 				<p>
-					&copy; copyright yourname. design and developed by <a href="https://www.themesine.com/">themesine</a>
+					&copy; copyright badsha. design by <a href="https://www.themesine.com/">themesine</a> and developed by badsha
 				</p><!--/p-->
 			</div><!--/.text-center-->
 		</div><!--/.container-->
